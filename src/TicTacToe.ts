@@ -4,27 +4,33 @@ export enum CellState {
 	O = 'O'
 } // Representing players X, O, and null for empty
 
+export enum Player {
+	USER1 = 'X',
+	USER2 = 'O'
+}
+
 export class TicTacToe {
 	private board: CellState[];
+	private currentPlayer: Player;
 
-	constructor(board?: CellState[]) {
-		this.board = board ?? Array(9).fill(CellState.EMPTY);
+	constructor() {
+		this.board = Array(9).fill(CellState.EMPTY);
+		this.currentPlayer = Player.USER1;
 	}
 
 	public toggleCell(index: number): TicTacToe {
-		const newBoard = this.board.map((cell, i) =>
-			i === index
-				? cell === CellState.EMPTY
-					? CellState.X
-					: cell === CellState.X
-					? CellState.O
-					: CellState.EMPTY
-				: cell
-		);
-		console.log(`Cell ${index} is now: ${this.board[index]}`);
-		return new TicTacToe(newBoard);
+		if (this.board[index] === CellState.EMPTY) {
+			this.board[index] = this.currentPlayer === Player.USER1 ? CellState.X : CellState.O;
+			this.currentPlayer = this.currentPlayer === Player.USER1 ? Player.USER2 : Player.USER1;
+		}
+
+		return this;
 	}
 
+	public resetGame(): void {
+		this.board = Array(9).fill(CellState.EMPTY);
+		this.currentPlayer = Player.USER1;
+	}
 	// Getter for the game state
 	public getBoard(): CellState[] {
 		return this.board;
