@@ -1,24 +1,23 @@
 <script lang="ts">
-	import { TicTacToe } from '../TicTacToe'; // Assuming TicTacToe class is in a separate file
+	import { TicTacToe, Player } from '../TicTacToe'; // Assuming TicTacToe class is in a separate file
 
 	let game = new TicTacToe();
 	let gameStarted = false;
+	let winner: Player | null = null;
 
 	function gameStart() {
-		game.resetGame();
+		game = new TicTacToe();
 		gameStarted = true;
+		winner = null;
 	}
 
 	function handleCellClick(index: number) {
-		if (gameStarted) {
-			game = game.toggleCell(index);
-			console.log(index);
-			console.log(game.getBoard());
+		if (gameStarted && !winner) {
+			game = game.makeMove(index);
+			if (game.checkWin()) {
+				winner = game.getCurrentPlayer() === Player.USER1 ? Player.USER2 : Player.USER1;
+			}
 		}
-	}
-	function resetGame() {
-		game = new TicTacToe();
-		gameStarted = false;
 	}
 </script>
 
@@ -32,7 +31,10 @@
 	{/key}
 </div>
 <button class="start" on:click={gameStart}>Start Game</button>
-<button class="start" on:click={resetGame}>Reset Game</button>
+
+{#if winner}
+	<p>Congratulations to {winner}</p>
+{/if}
 
 <style>
 	.start {
