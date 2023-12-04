@@ -1,4 +1,4 @@
-export enum CellState {
+enum CellState {
 	EMPTY = '-',
 	X = 'X',
 	O = 'O'
@@ -12,10 +12,12 @@ export enum Player {
 export class TicTacToe {
 	private board: CellState[];
 	private currentPlayer: Player;
+	private static nextPlayer: Player = Player.USER2;
 
 	constructor() {
 		this.board = Array(9).fill(CellState.EMPTY);
-		this.currentPlayer = Player.USER1;
+		this.currentPlayer = TicTacToe.nextPlayer;
+		TicTacToe.nextPlayer = TicTacToe.nextPlayer === Player.USER1 ? Player.USER2 : Player.USER1;
 	}
 
 	public makeMove(index: number): TicTacToe {
@@ -26,7 +28,7 @@ export class TicTacToe {
 		return this;
 	}
 
-	public checkWin(): boolean {
+	public checkWin(): number {
 		const winningCombinations = [
 			[0, 1, 2],
 			[3, 4, 5],
@@ -38,16 +40,17 @@ export class TicTacToe {
 			[2, 4, 6]
 		];
 
-		for (let combo of winningCombinations) {
+		for (let index = 0; index < winningCombinations.length; index++) {
+			const combo = winningCombinations[index];
 			if (
 				combo.every((i) => this.board[i] === CellState.X) ||
 				combo.every((i) => this.board[i] === CellState.O)
 			) {
-				return true;
+				return index;
 			}
 		}
 
-		return false;
+		return -1;
 	}
 
 	public getBoard(): CellState[] {
