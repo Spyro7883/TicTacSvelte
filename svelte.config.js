@@ -6,10 +6,6 @@ const config = {
 	preprocess: preprocess({
 		// Enable SASS/SCSS support
 		sass: true,
-		scss: {
-			// Optionally, you can use the "prependData" option to include common styles
-			prependData: `@import 'src/styles/global.scss';`
-		},
 	}),
 
 	kit: {

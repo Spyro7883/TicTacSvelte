@@ -1,0 +1,14 @@
+// Mixins
+
+@mixin font_reusable($family, $weight, $size) {
+    font-family: $family;
+    font-weight: $weight;
+    font-size: $size;
+}
+
+@mixin button_reusable {
+    border-radius: 0.5rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
