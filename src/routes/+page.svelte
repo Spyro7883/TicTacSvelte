@@ -46,26 +46,39 @@
 	}
 </script>
 
-<div class="board">
-	{#key game}
-		{#each game.getBoard() as cell, index}
-			<button disabled={!gameStarted} on:click={() => handleCellClick(index)}>
-				{cell}
-			</button>
-		{/each}
-	{/key}
-</div>
-{#if winningLineClass}
-	<div class={`winning-line ${winningLineClass}`} />
-{/if}
-<button class="start" on:click={gameStart}>Start Game</button>
+<header>
+	<h1 class="title">Tic Tac Toe</h1>
+	<p class="subtitle">Minigame</p>
+</header>
+<main class="layout">
+	<div class="board">
+		{#key game}
+			{#each game.getBoard() as cell, index}
+				<button
+					class={cell === 'O' ? 'circle-bg' : ''}
+					disabled={!gameStarted}
+					on:click={() => handleCellClick(index)}
+				>
+					<div class={cell === 'O' ? 'circle-main' : ''}>
+						{cell}
+					</div>
+				</button>
+			{/each}
+		{/key}
+	</div>
+	{#if winningLineClass}
+		<div class={`winning-line ${winningLineClass}`} />
+	{/if}
+	<button class="start" on:click={gameStart}>Start Game</button>
 
-<p>Score - User1: {scoreUser1} | User2: {scoreUser2}</p>
+	<p>Score - User1: {scoreUser1} | User2: {scoreUser2}</p>
 
-{#if winner}
-	<p>Congratulations to {winner}</p>
-{/if}
+	{#if winner}
+		<p>Congratulations to {winner}</p>
+	{/if}
+</main>
+<footer />
 
 <style lang="scss">
-	@import 'src/styles/tictactoe.scss';
+	@import 'src/styles/tictac.module.scss';
 </style>

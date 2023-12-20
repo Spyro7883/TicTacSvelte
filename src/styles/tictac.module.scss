@@ -1,0 +1,299 @@
+@use "./_mixins.scss" as mixins;
+
+main {
+    &.layout {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+header {
+    margin-block-end: 3.5rem;
+}
+
+h1 {
+    &.title {
+        @include mixins.font_reusable("Montserrat", 700, 3rem);
+        color: #000;
+        text-align: center;
+    }
+}
+
+p {
+    &.subtitle {
+        @include mixins.font_reusable("Montserrat", 500, 2.5rem);
+        color: #000;
+        text-align: center;
+    }
+}
+
+button {
+    &.circle-bg {
+        @include mixins.button_reusable;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 6.25rem;
+        height: 6.25rem;
+        background: black;
+        isolation: isolate;
+
+        position: relative;
+
+        &:nth-child(1) {
+
+            &::before,
+            &::after {
+                content: "";
+                background: black;
+                width: 10px;
+                height: 121px;
+                position: absolute;
+            }
+
+            &::after {
+                right: -20px;
+            }
+
+            &::before {
+                bottom: -75px;
+                margin-inline-start: 20px;
+                rotate: 90deg;
+            }
+        }
+
+        &:nth-child(3) {
+
+            &::before,
+            &::after {
+                content: "";
+                background: black;
+                width: 10px;
+                height: 121px;
+                position: absolute;
+            }
+
+            &::after {
+                left: -20px;
+            }
+
+            &::before {
+                bottom: -75px;
+                margin-inline-end: 19px;
+                rotate: 90deg;
+            }
+        }
+
+        &:nth-child(2) {
+
+            &::before {
+                content: "";
+                background: black;
+                width: 10px;
+                height: 121px;
+                position: absolute;
+            }
+
+            &::before {
+                bottom: -75px;
+                margin-inline-end: 0px;
+                rotate: 90deg;
+            }
+        }
+
+        &:nth-child(4) {
+
+            &::after {
+                content: "";
+                background: black;
+                width: 10px;
+                height: 121px;
+                position: absolute;
+            }
+
+            &::after {
+                right: -20px;
+            }
+        }
+
+        &:nth-child(6) {
+
+            &::before {
+                content: "";
+                background: black;
+                width: 10px;
+                height: 121px;
+                position: absolute;
+            }
+
+            &::before {
+                left: -20px;
+            }
+        }
+
+        &:nth-child(7) {
+
+            &::before,
+            &::after {
+                content: "";
+                background: black;
+                width: 10px;
+                height: 121px;
+                position: absolute;
+            }
+
+            &::after {
+                right: -20px;
+            }
+
+            &::before {
+                top: -75px;
+                margin-inline-start: 20px;
+                rotate: 90deg;
+            }
+        }
+
+        &:nth-child(8) {
+
+            &::before {
+                content: "";
+                background: black;
+                width: 10px;
+                height: 121px;
+                position: absolute;
+            }
+
+            &::before {
+                top: -75px;
+                margin-inline-end: 0px;
+                rotate: 90deg;
+            }
+        }
+
+        &:nth-child(9) {
+
+            &::before,
+            &::after {
+                content: "";
+                background: black;
+                width: 10px;
+                height: 121px;
+                position: absolute;
+            }
+
+            &::after {
+                left: -20px;
+            }
+
+            &::before {
+                top: -75px;
+                margin-inline-end: 19px;
+                rotate: 90deg;
+            }
+        }
+    }
+
+
+}
+
+div {
+    &.circle-main {
+        @include mixins.button_reusable;
+        border-radius: 50%;
+        width: 4.5rem;
+        height: 4.5rem;
+        background: linear-gradient(63deg, #C5FFF8 -11.54%, #7B66FF 97.65%);
+        background-blend-mode: screen;
+        position: absolute;
+    }
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 6.25rem);
+    grid-template-rows: repeat(3, 6.25rem);
+    position: relative;
+    gap: 1.875rem;
+}
+
+.winning-line {
+    width: 150px;
+
+    position: absolute;
+    background-color: black;
+    z-index: 1;
+}
+
+.horizontal-one,
+.horizontal-two,
+.horizontal-three {
+    height: 10px;
+    transform: translateY(-50%);
+}
+
+.horizontal-one {
+    top: 32px;
+}
+
+.horizontal-two {
+    top: 84px;
+}
+
+.horizontal-three {
+    top: 135px;
+}
+
+.vertical-one,
+.vertical-two,
+.vertical-three {
+    width: 10px;
+    height: 150px;
+    top: 10px;
+    left: 34px;
+    transform: translateX(-50%);
+}
+
+.vertical-two {
+    left: 84px;
+}
+
+.vertical-three {
+    left: 136px;
+}
+
+.diagonal-right,
+.diagonal-left {
+    background: none;
+    top: 85px;
+}
+
+.diagonal-right::before {
+    content: '';
+    position: absolute;
+    background-color: black;
+    width: 140%;
+    height: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.diagonal-left::before {
+    content: '';
+    position: absolute;
+    background-color: black;
+    width: 140%;
+    height: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+button {
+    &.start {
+        width: 100px;
+    }
+}
