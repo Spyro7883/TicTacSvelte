@@ -21,6 +21,18 @@ h1 {
     }
 }
 
+h2 {
+    &.score>p {
+        @include mixins.font_reusable("Montserrat", 500, 2.5rem);
+        color: #000;
+        text-align: center;
+
+        &:last-child {
+            font-size: 1.75rem;
+        }
+    }
+}
+
 p {
     &.subtitle {
         @include mixins.font_reusable("Montserrat", 500, 2.5rem);
@@ -42,161 +54,27 @@ button {
         isolation: isolate;
 
         position: relative;
-
-        &:nth-child(1) {
-
-            &::before,
-            &::after {
-                content: "";
-                background: black;
-                width: 10px;
-                height: 121px;
-                position: absolute;
-            }
-
-            &::after {
-                right: -20px;
-            }
-
-            &::before {
-                bottom: -75px;
-                margin-inline-start: 20px;
-                rotate: 90deg;
-            }
-        }
-
-        &:nth-child(3) {
-
-            &::before,
-            &::after {
-                content: "";
-                background: black;
-                width: 10px;
-                height: 121px;
-                position: absolute;
-            }
-
-            &::after {
-                left: -20px;
-            }
-
-            &::before {
-                bottom: -75px;
-                margin-inline-end: 19px;
-                rotate: 90deg;
-            }
-        }
-
-        &:nth-child(2) {
-
-            &::before {
-                content: "";
-                background: black;
-                width: 10px;
-                height: 121px;
-                position: absolute;
-            }
-
-            &::before {
-                bottom: -75px;
-                margin-inline-end: 0px;
-                rotate: 90deg;
-            }
-        }
-
-        &:nth-child(4) {
-
-            &::after {
-                content: "";
-                background: black;
-                width: 10px;
-                height: 121px;
-                position: absolute;
-            }
-
-            &::after {
-                right: -20px;
-            }
-        }
-
-        &:nth-child(6) {
-
-            &::before {
-                content: "";
-                background: black;
-                width: 10px;
-                height: 121px;
-                position: absolute;
-            }
-
-            &::before {
-                left: -20px;
-            }
-        }
-
-        &:nth-child(7) {
-
-            &::before,
-            &::after {
-                content: "";
-                background: black;
-                width: 10px;
-                height: 121px;
-                position: absolute;
-            }
-
-            &::after {
-                right: -20px;
-            }
-
-            &::before {
-                top: -75px;
-                margin-inline-start: 20px;
-                rotate: 90deg;
-            }
-        }
-
-        &:nth-child(8) {
-
-            &::before {
-                content: "";
-                background: black;
-                width: 10px;
-                height: 121px;
-                position: absolute;
-            }
-
-            &::before {
-                top: -75px;
-                margin-inline-end: 0px;
-                rotate: 90deg;
-            }
-        }
-
-        &:nth-child(9) {
-
-            &::before,
-            &::after {
-                content: "";
-                background: black;
-                width: 10px;
-                height: 121px;
-                position: absolute;
-            }
-
-            &::after {
-                left: -20px;
-            }
-
-            &::before {
-                top: -75px;
-                margin-inline-end: 19px;
-                rotate: 90deg;
-            }
-        }
     }
 
+    &.cross-bg {
+        @include mixins.button_reusable;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.25rem;
+        height: 6.25rem;
+        transform: translateX(200%) rotate(-45deg);
+        background: black;
+        mix-blend-mode: hard-light;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        isolation: isolate;
+        position: relative;
+    }
 
+    &.empty-cell {
+        @include mixins.button_reusable;
+        background: transparent
+    }
 }
 
 div {
@@ -208,6 +86,53 @@ div {
         background: linear-gradient(63deg, #C5FFF8 -11.54%, #7B66FF 97.65%);
         background-blend-mode: screen;
         position: absolute;
+    }
+
+    &.cross-main {
+        @include mixins.button_reusable;
+        width: 1.25rem;
+        height: 6.25rem;
+        transform: rotate(90deg);
+        background: black;
+        mix-blend-mode: hard-light;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        position: absolute;
+    }
+
+    &.bar {
+        position: absolute;
+        background: black;
+        border-radius: .5rem;
+
+        &:nth-child(1),
+        &:nth-child(2) {
+            width: .625rem;
+            height: 22.5rem;
+        }
+
+        &:nth-child(3),
+        &:nth-child(4) {
+            width: 22.5rem;
+            height: .625rem;
+        }
+
+        &:nth-child(1) {
+            left: 6.875rem;
+        }
+
+        &:nth-child(2) {
+            right: 6.875rem;
+        }
+
+        &:nth-child(3) {
+
+            top: 6.875rem;
+        }
+
+        &:nth-child(4) {
+
+            bottom: 6.875rem;
+        }
     }
 }
 

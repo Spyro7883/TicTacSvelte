@@ -1,5 +1,5 @@
 enum CellState {
-	EMPTY = '-',
+	EMPTY = '',
 	X = 'X',
 	O = 'O'
 }

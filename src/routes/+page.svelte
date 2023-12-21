@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { TicTacToe, Player } from '../TicTacToe';
+	import styles from '../styles/tictac.module.scss';
 
 	let game = new TicTacToe();
 	let gameStarted = false;
@@ -47,38 +48,49 @@
 </script>
 
 <header>
-	<h1 class="title">Tic Tac Toe</h1>
-	<p class="subtitle">Minigame</p>
+	<h1 class={styles.title}>Tic Tac Toe</h1>
+	<p class={styles.subtitle}>Minigame</p>
 </header>
-<main class="layout">
-	<div class="board">
+<main class={styles.layout}>
+	<div class={styles.board}>
+		<div class={styles.bar} />
+		<div class={styles.bar} />
+		<div class={styles.bar} />
+		<div class={styles.bar} />
 		{#key game}
 			{#each game.getBoard() as cell, index}
 				<button
-					class={cell === 'O' ? 'circle-bg' : ''}
+					class={cell === 'X'
+						? styles['cross-bg']
+						: cell === 'O'
+						? styles['circle-bg']
+						: styles['empty-cell']}
 					disabled={!gameStarted}
 					on:click={() => handleCellClick(index)}
 				>
-					<div class={cell === 'O' ? 'circle-main' : ''}>
-						{cell}
-					</div>
+					<div
+						class={cell === 'X'
+							? styles['cross-main']
+							: cell === 'O'
+							? styles['circle-main']
+							: null}
+					/>
 				</button>
 			{/each}
 		{/key}
 	</div>
 	{#if winningLineClass}
-		<div class={`winning-line ${winningLineClass}`} />
+		<div class={`${styles['winning-line']} ${styles[winningLineClass]}`} />
 	{/if}
-	<button class="start" on:click={gameStart}>Start Game</button>
+	<button class={styles.start} on:click={gameStart}>Start Game</button>
 
-	<p>Score - User1: {scoreUser1} | User2: {scoreUser2}</p>
+	<h2 class={styles.score}>
+		<p>Score</p>
+		<p>1st Player: {scoreUser1} 2nd Player: {scoreUser2}</p>
+	</h2>
 
 	{#if winner}
 		<p>Congratulations to {winner}</p>
 	{/if}
 </main>
 <footer />
-
-<style lang="scss">
-	@import 'src/styles/tictac.module.scss';
-</style>
