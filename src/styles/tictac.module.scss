@@ -6,6 +6,7 @@ main {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        overflow-x: hidden;
     }
 }
 
@@ -145,77 +146,100 @@ div {
 }
 
 .winning-line {
-    width: 150px;
-
+    inset: 0;
     position: absolute;
-    background-color: black;
     z-index: 1;
-}
-
-.horizontal-one,
-.horizontal-two,
-.horizontal-three {
-    height: 10px;
-    transform: translateY(-50%);
-}
-
-.horizontal-one {
-    top: 32px;
-}
-
-.horizontal-two {
-    top: 84px;
-}
-
-.horizontal-three {
-    top: 135px;
-}
-
-.vertical-one,
-.vertical-two,
-.vertical-three {
-    width: 10px;
-    height: 150px;
-    top: 10px;
-    left: 34px;
-    transform: translateX(-50%);
-}
-
-.vertical-two {
-    left: 84px;
-}
-
-.vertical-three {
-    left: 136px;
-}
-
-.diagonal-right,
-.diagonal-left {
     background: none;
-    top: 85px;
 }
 
-.diagonal-right::before {
-    content: '';
-    position: absolute;
-    background-color: black;
-    width: 140%;
-    height: 10px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(45deg);
+.horizontal {
+
+    &-one,
+    &-two,
+    &-three {
+        &::before {
+            content: '';
+            position: absolute;
+            background-color: black;
+            width: 120%;
+            height: 10px;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+    }
+
+    &-one::before {
+
+        top: 14%;
+    }
+
+    &-two::before {
+
+        top: 50%;
+    }
+
+    &-three::before {
+
+        top: 86%;
+    }
 }
 
-.diagonal-left::before {
-    content: '';
-    position: absolute;
-    background-color: black;
-    width: 140%;
-    height: 10px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-45deg);
+.vertical {
+
+    &-one,
+    &-two,
+    &-three {
+        &::before {
+            content: '';
+            position: absolute;
+            background-color: black;
+            width: 120%;
+            height: 10px;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+    }
+
+    &-one::before {
+        left: 14%;
+    }
+
+    &-two::before {
+        left: 50%;
+    }
+
+    &-three::before {
+
+        left: 86%;
+    }
 }
+
+.diagonal {
+
+    &-right,
+    &-left {
+        &::before {
+            content: '';
+            position: absolute;
+            background-color: black;
+            width: 140%;
+            height: 10px;
+            top: 50%;
+            left: 50%;
+        }
+    }
+
+    &-right::before {
+
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &-left::before {
+        transform: translate(-50%, -50%) rotate(-45deg);
+    }
+}
+
+
 
 button {
     &.start {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { TicTacToe, Player } from '../TicTacToe';
+	import { TicTacToe, Player, CellState } from '../TicTacToe';
 	import styles from '../styles/tictac.module.scss';
 
 	let game = new TicTacToe();
@@ -35,8 +35,14 @@
 				winningLineClass = winningLineClasses[winIndex];
 				winner = game.getCurrentPlayer() === Player.USER1 ? Player.USER2 : Player.USER1;
 				updateScores(winner);
+				gameStarted = false;
+			} else if (isDraw()) {
+				gameStarted = false;
 			}
 		}
+	}
+	function isDraw() {
+		return game.getBoard().every((cell) => cell !== CellState.EMPTY);
 	}
 	function updateScores(winner: Player) {
 		if (winner === Player.USER1) {
@@ -78,17 +84,18 @@
 				</button>
 			{/each}
 		{/key}
+		{#if winningLineClass}
+			<div class={`${styles['winning-line']} ${styles[winningLineClass]}`} />
+		{/if}
 	</div>
-	{#if winningLineClass}
-		<div class={`${styles['winning-line']} ${styles[winningLineClass]}`} />
-	{/if}
-	<button class={styles.start} on:click={gameStart}>Start Game</button>
 
 	<h2 class={styles.score}>
 		<p>Score</p>
 		<p>1st Player: {scoreUser1} 2nd Player: {scoreUser2}</p>
 	</h2>
-
+	{#if !gameStarted}
+		<button class={styles.start} on:click={gameStart}>Start Game</button>
+	{/if}
 	{#if winner}
 		<p>Congratulations to {winner}</p>
 	{/if}

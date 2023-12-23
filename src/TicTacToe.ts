@@ -4,12 +4,12 @@ enum CellState {
 	O = 'O'
 }
 
-export enum Player {
+enum Player {
 	USER1 = 'X',
 	USER2 = 'O'
 }
 
-export class TicTacToe {
+class TicTacToe {
 	private board: CellState[];
 	private currentPlayer: Player;
 	private static nextPlayer: Player = Player.USER2;
@@ -61,3 +61,5 @@ export class TicTacToe {
 		return this.currentPlayer;
 	}
 }
+
+export { TicTacToe, Player, CellState };
