@@ -7,11 +7,13 @@ main {
         align-items: center;
         justify-content: center;
         overflow-x: hidden;
+        gap: 1rem;
+        margin-block-end: 1rem;
     }
 }
 
 header {
-    margin-block-end: 3.5rem;
+    margin-block-end: 3rem;
 }
 
 h1 {
@@ -39,6 +41,10 @@ p {
         @include mixins.font_reusable("Montserrat", 500, 2.5rem);
         color: #000;
         text-align: center;
+    }
+
+    &.winner {
+        @include mixins.font_reusable("Montserrat", 500, 2.5rem);
     }
 }
 
@@ -75,6 +81,22 @@ button {
     &.empty-cell {
         @include mixins.button_reusable;
         background: transparent
+    }
+
+    &.continue {
+        @include mixins.font_reusable("Montserrat", 500, 2.5rem);
+        @include mixins.button_reusable;
+        border-radius: 1rem;
+        color: #000;
+        text-align: center;
+        mix-blend-mode: hard-light;
+        background: transparent;
+        border: .25rem solid black;
+        fill: #000;
+
+        &:hover {
+            background: white
+        }
     }
 }
 
@@ -236,13 +258,5 @@ div {
 
     &-left::before {
         transform: translate(-50%, -50%) rotate(-45deg);
-    }
-}
-
-
-
-button {
-    &.start {
-        width: 100px;
     }
 }

@@ -94,10 +94,10 @@
 		<p>1st Player: {scoreUser1} 2nd Player: {scoreUser2}</p>
 	</h2>
 	{#if !gameStarted}
-		<button class={styles.start} on:click={gameStart}>Start Game</button>
+		<button class={styles.continue} on:click={gameStart}>Continue Game</button>
 	{/if}
 	{#if winner}
-		<p>Congratulations to {winner}</p>
+		<p class={styles.winner}>Congratulations to {winner}</p>
 	{/if}
 </main>
 <footer />
