@@ -7,13 +7,9 @@ main {
         align-items: center;
         justify-content: center;
         overflow-x: hidden;
-        gap: 1rem;
-        margin-block-end: 1rem;
+        gap: .75rem;
+        padding-block: 1rem;
     }
-}
-
-header {
-    margin-block-end: 3rem;
 }
 
 h1 {
@@ -37,14 +33,18 @@ h2 {
 }
 
 p {
-    &.subtitle {
+
+    &.subtitle,
+    &.paragraph,
+    &.winner,
+    &.draw {
         @include mixins.font_reusable("Montserrat", 500, 2.5rem);
         color: #000;
         text-align: center;
     }
 
-    &.winner {
-        @include mixins.font_reusable("Montserrat", 500, 2.5rem);
+    &.paragraph {
+        margin-block-start: 5vh;
     }
 }
 
@@ -83,24 +83,46 @@ button {
         background: transparent
     }
 
+    &.start,
     &.continue {
-        @include mixins.font_reusable("Montserrat", 500, 2.5rem);
+        @include mixins.font_reusable("Montserrat", 500, 2rem);
         @include mixins.button_reusable;
         border-radius: 1rem;
         color: #000;
         text-align: center;
         mix-blend-mode: hard-light;
-        background: transparent;
         border: .25rem solid black;
         fill: #000;
+
+        background: linear-gradient(180deg, #5FBDFF 0%, #96EFFF 100%);
+        background-blend-mode: hard-light;
 
         &:hover {
             background: white
         }
     }
+
+    &.start {
+        margin-block-start: 5vh
+    }
 }
 
 div {
+    &.board {
+        display: grid;
+        grid-template-columns: repeat(3, 6.25rem);
+        grid-template-rows: repeat(3, 6.25rem);
+        position: relative;
+        gap: 1.875rem;
+    }
+
+    &.winning-line {
+        inset: 0;
+        position: absolute;
+        z-index: 1;
+        background: none;
+    }
+
     &.circle-main {
         @include mixins.button_reusable;
         border-radius: 50%;
@@ -157,106 +179,136 @@ div {
             bottom: 6.875rem;
         }
     }
-}
 
-.board {
-    display: grid;
-    grid-template-columns: repeat(3, 6.25rem);
-    grid-template-rows: repeat(3, 6.25rem);
-    position: relative;
-    gap: 1.875rem;
-}
+    &.horizontal {
 
-.winning-line {
-    inset: 0;
-    position: absolute;
-    z-index: 1;
-    background: none;
-}
+        &-one,
+        &-two,
+        &-three {
+            &::before {
+                content: '';
+                position: absolute;
+                background-color: black;
+                width: 120%;
+                height: 10px;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+        }
 
-.horizontal {
+        &-one::before {
 
-    &-one,
-    &-two,
-    &-three {
-        &::before {
-            content: '';
-            position: absolute;
-            background-color: black;
-            width: 120%;
-            height: 10px;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(0deg);
+            top: 14%;
+        }
+
+        &-two::before {
+
+            top: 50%;
+        }
+
+        &-three::before {
+
+            top: 86%;
         }
     }
 
-    &-one::before {
+    &.vertical {
 
-        top: 14%;
-    }
-
-    &-two::before {
-
-        top: 50%;
-    }
-
-    &-three::before {
-
-        top: 86%;
-    }
-}
-
-.vertical {
-
-    &-one,
-    &-two,
-    &-three {
-        &::before {
-            content: '';
-            position: absolute;
-            background-color: black;
-            width: 120%;
-            height: 10px;
-            top: 50%;
-            transform: translate(-50%, -50%) rotate(90deg);
+        &-one,
+        &-two,
+        &-three {
+            &::before {
+                content: '';
+                position: absolute;
+                background-color: black;
+                width: 120%;
+                height: 10px;
+                top: 50%;
+                transform: translate(-50%, -50%) rotate(90deg);
+            }
         }
-    }
 
-    &-one::before {
-        left: 14%;
-    }
+        &-one::before {
+            left: 14%;
+        }
 
-    &-two::before {
-        left: 50%;
-    }
-
-    &-three::before {
-
-        left: 86%;
-    }
-}
-
-.diagonal {
-
-    &-right,
-    &-left {
-        &::before {
-            content: '';
-            position: absolute;
-            background-color: black;
-            width: 140%;
-            height: 10px;
-            top: 50%;
+        &-two::before {
             left: 50%;
         }
+
+        &-three::before {
+
+            left: 86%;
+        }
     }
 
-    &-right::before {
+    &.diagonal {
 
-        transform: translate(-50%, -50%) rotate(45deg);
+        &-right,
+        &-left {
+            &::before {
+                content: '';
+                position: absolute;
+                background-color: black;
+                width: 140%;
+                height: 10px;
+                top: 50%;
+                left: 50%;
+            }
+        }
+
+        &-right::before {
+
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        &-left::before {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+    }
+}
+
+
+
+@media screen and (min-width: 400px) {
+
+    h1 {
+        &.title {
+            font-size: 4rem;
+        }
     }
 
-    &-left::before {
-        transform: translate(-50%, -50%) rotate(-45deg);
+    p {
+
+        &.subtitle,
+        &.paragraph {
+            font-size: 3rem;
+        }
+    }
+
+    button {
+
+        &.start,
+        &.continue {
+            font-size: 2.5rem;
+        }
+    }
+}
+
+@media screen and (min-width: 900px) {
+
+    p {
+
+        &.paragraph {
+            font-size: 5rem;
+        }
+    }
+
+    button {
+
+        &.start,
+        &.continue {
+            font-size: 3rem;
+        }
     }
 }

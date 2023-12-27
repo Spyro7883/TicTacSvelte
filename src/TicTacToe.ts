@@ -53,6 +53,24 @@ class TicTacToe {
 		return -1;
 	}
 
+	getWinningLineClass(): string | null {
+		const winIndex = this.checkWin();
+		const winningLineClasses = [
+			'horizontal-one',
+			'horizontal-two',
+			'horizontal-three',
+			'vertical-one',
+			'vertical-two',
+			'vertical-three',
+			'diagonal-right',
+			'diagonal-left'
+		];
+		if (winIndex !== -1) {
+			return winningLineClasses[winIndex];
+		}
+		return null;
+	}
+
 	public getBoard(): CellState[] {
 		return this.board;
 	}
